@@ -54,6 +54,13 @@ class SiteController extends Controller
         ];
     }
 
+    //declaring speak action
+
+    public function actionSpeak($message ='default message')
+    {
+        return $this->render('speak',['message'=>$message]);
+    }
+
     /**
      * Displays homepage.
      *
