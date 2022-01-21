@@ -9,8 +9,9 @@ use Yii;
  *
  * @property int $id
  * @property string $title
- * @property int $author_id
+ * @property int|null $author_id
  * @property string $description
+ * @property string|null $isbn
  *
  * @property Author $author
  */
@@ -30,11 +31,11 @@ class Book extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'author_id', 'description'], 'required'],
+            [['title', 'description'], 'required'],
             [['author_id'], 'integer'],
-            [['title'], 'string', 'max' => 64],
+            [['title', 'isbn'], 'string', 'max' => 64],
             [['description'], 'string', 'max' => 255],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::class, 'targetAttribute' => ['author_id' => 'id']],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
 
@@ -48,6 +49,7 @@ class Book extends \yii\db\ActiveRecord
             'title' => Yii::t('app', 'Title'),
             'author_id' => Yii::t('app', 'Author ID'),
             'description' => Yii::t('app', 'Description'),
+            'isbn' => Yii::t('app', 'Isbn'),
         ];
     }
 
@@ -58,6 +60,6 @@ class Book extends \yii\db\ActiveRecord
      */
     public function getAuthor()
     {
-        return $this->hasOne(Author::class, ['id' => 'author_id']);
+        return $this->hasOne(Author::className(), ['id' => 'author_id']);
     }
 }
