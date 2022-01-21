@@ -52,6 +52,7 @@ $config = [
         ],
         
     ],
+    //'defaultRoute' =>'example', //changing default route
     'params' => $params,
 ];
 
