@@ -36,6 +36,14 @@ class Book extends \yii\db\ActiveRecord
             [['title', 'isbn'], 'string', 'max' => 64],
             [['description'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
+
+            //[['password'],'required', 'on' => 'create'], //'on' allow to specify scenarios, 'create' is the scenarios.
+            //[['role'],'in',['admin','user']],  
+
+           // [['password'],'compare'],
+            
+
+
         ];
     }
 
