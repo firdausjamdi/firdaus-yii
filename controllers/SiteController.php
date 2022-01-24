@@ -2,13 +2,20 @@
 
 namespace app\controllers;
 
+use app\models\ResendVerificationEmailForm;
+use app\models\VerifyEmailForm;
 use Yii;
-use yii\filters\AccessControl;
+use app\base\InvalidArgumentException;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use app\models\LoginForm;
+use app\models\PasswordResetRequestForm;
+use app\models\ResetPasswordForm;
+use app\models\SignupForm;
 use app\models\ContactForm;
+
 
 class SiteController extends Controller
 {
@@ -132,4 +139,19 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+            return $this->goHome();
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+
 }

@@ -35,7 +35,7 @@ class Book extends \yii\db\ActiveRecord
             [['author_id'], 'integer'],
             [['title', 'isbn'], 'string', 'max' => 64],
             [['description'], 'string', 'max' => 255],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id'],'message'=>Yii::t('app','This Author does not exist')]
 
             //[['password'],'required', 'on' => 'create'], //'on' allow to specify scenarios, 'create' is the scenarios.
             //[['role'],'in',['admin','user']],  
@@ -55,7 +55,7 @@ class Book extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'title' => Yii::t('app', 'Title'),
-            'author_id' => Yii::t('app', 'Author ID'),
+            'author_id' => Yii::t('app', 'Author'),
             'description' => Yii::t('app', 'Description'),
             'isbn' => Yii::t('app', 'Isbn'),
         ];
